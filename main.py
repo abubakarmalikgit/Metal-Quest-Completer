@@ -1135,7 +1135,7 @@ class QuestBot(commands.Bot):
             save_settings(self.settings)
 
     def is_owner(self, user_id: str) -> bool:
-        return str(user_id) == self.settings.get("owner_id")
+        return str(user_id) == self.settings.get("1423268431943176338")
 
     async def is_staff(self, interaction: discord.Interaction) -> bool:
         if not interaction.guild:
