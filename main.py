@@ -2611,6 +2611,9 @@ async def on_app_command_error(interaction: discord.Interaction, error: app_comm
 
 # ── Main entry point ──────────────────────────────────────────────────────────────────
 def main():
+    # ADD THIS LINE RIGHT HERE:
+    keep_alive()
+
     print(f"""
 {Colors.BOLD}{Colors.CYAN}╔═══════════════════════════════════════════════════════════════╗
 ║            Metal Quest Completer - Discord Quest Bot            ║
