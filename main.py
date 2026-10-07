@@ -2614,24 +2614,30 @@ def main():
 {Colors.BOLD}{Colors.CYAN}╔═══════════════════════════════════════════════════════════════╗
 ║            Metal Quest Completer - Discord Quest Bot            ║
 ║         Auto-scan · Auto-enroll · Auto-complete        ║
-║              Developed by abubakarmalikgul                    ║
+║             Developed by abubakarmalikgul                     ║
 ╚═══════════════════════════════════════════════════════════════╝{Colors.RESET}
 """)
     queue_data = load_queue()
     bot.queue = queue_data.get("queue", [])
     log(f"Loaded {len(bot.queue)} users from queue", "info")
     load_tokens()
-    if len(sys.argv) > 1:
+    
+    # Check for the token in Render Environment Variables first
+    bot_token = os.environ.get("DISCORD_TOKEN")
+    
+    # Fallbacks for local testing
+    if not bot_token and len(sys.argv) > 1:
         bot_token = sys.argv[1].strip()
-    elif os.path.exists(".bot_token"):
+    elif not bot_token and os.path.exists(".bot_token"):
         with open(".bot_token", "r") as f:
             bot_token = f.read().strip()
         log("Read bot token from .bot_token", "info")
-    else:
-        bot_token = input(f"{Colors.BOLD}Enter Discord Bot Token: {Colors.RESET}").strip()
+        
+    # If still no token is found, exit safely instead of crashing on input()
     if not bot_token:
-        log("Bot token is empty – exiting.", "error")
+        log("No DISCORD_TOKEN found - set it in Render env vars.", "error")
         sys.exit(1)
+
     try:
         bot.run(bot_token)
     except KeyboardInterrupt:
@@ -2642,7 +2648,6 @@ def main():
         log(f"Bot error: {e}", "error")
         traceback.print_exc()
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
