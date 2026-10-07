@@ -1,0 +1,5 @@
+tokens.json
+queue.json
+settings.json
+*.log
+__pycache__/
