@@ -19,6 +19,7 @@ import asyncio
 from datetime import datetime, timezone, timedelta
 from typing import Optional, Dict, List, Any
 import concurrent.futures
+from keep_alive import keep_alive
 
 # ── Config ───────────────────────────────────────────────────────────────────────────────
 API_BASE = "https://discord.com/api/v9"
